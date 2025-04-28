@@ -1,10 +1,10 @@
 from odoo import _, api, models
 
 
-class AccountMoveSend(models.AbstractModel):
-    
-    _name = 'account.move.send.custom'
+class AccountMoveSend(models.Model):
+    _name = 'account.move.send'
     _inherit = 'account.move.send'
+    _description = 'Send Invoices with JoFotara EDI'
 
     @api.model
     def _l10n_jo_is_edi_applicable(self, move):
