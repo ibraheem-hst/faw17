@@ -2,6 +2,8 @@ from odoo import _, api, models
 
 
 class AccountMoveSend(models.AbstractModel):
+    
+    _name = 'account.move.send.custom'
     _inherit = 'account.move.send'
 
     @api.model
