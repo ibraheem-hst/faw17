@@ -1,7 +1,7 @@
 from odoo import _, api, models
 
 
-class AccountMoveSend(models.AbstractModel):
+class AccountMoveSend(models.TransientModel):
     _inherit = 'account.move.send'
 
     @api.model
