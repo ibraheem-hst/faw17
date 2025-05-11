@@ -44,7 +44,7 @@ class AccountMoveSend(models.TransientModel):
         # EXTENDS 'account'
         res = super()._get_placeholder_mail_attachments_data(move)
 
-        if not move.l10n_jo_edi_xml_attachment_id and 'jo_edi' in extra_edis:
+        if not move.l10n_jo_edi_xml_attachment_id:
             attachment_name = move._l10n_jo_edi_get_xml_attachment_name()
             res.append(
                 {
