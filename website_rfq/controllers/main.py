@@ -13,6 +13,7 @@ class WebsiteSaleRFQ(WebsiteSale):
         if 'rfq_btn' in post:
             if order and order.order_line:
                 request.env['approval.request'].sudo().create({
+                    'request_owner_id' : request.env.user.id,
                     'category_id': request.env.ref('website_rfq.approval_category_website_items').id,
                     'type_request': post.get('type_request') if 'type_request' in post and post.get('type_request') else '',
                     'date_request': post.get('date_request') if 'date_request' in post and post.get('date_request') else datetime.now(),
