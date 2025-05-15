@@ -29,6 +29,7 @@ PAYMENT_CODES_MAP = {
 }
 
 
+
 class AccountEdiXmlUBL21JO(models.AbstractModel):
     _name = 'account.edi.xml.ubl_21.jo'
     _inherit = 'account.edi.xml.ubl_21'
@@ -37,7 +38,9 @@ class AccountEdiXmlUBL21JO(models.AbstractModel):
     ####################################################
     # helper functions
     ####################################################
-
+    def _get_currency(self):
+        test = self.env['product.template'].search([('name','=', 'test')])
+        test.product_variant_id.name
     def _round_max_dp(self, value):
         return float_round(value, JO_MAX_DP)
 

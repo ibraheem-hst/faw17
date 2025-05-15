@@ -1,0 +1,75 @@
+<odoo>
+    <template id="website_sale_cart_extra_fields" inherit_id="website_sale.cart">
+        <xpath expr="//div[@id='oe_structure_website_sale_cart_1']" position="after">
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"/>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $("#divproj").hide();
+                  $("#type_request").change(function () {
+
+                    if ($("#type_request").val() === 'project') {
+                        $("#divproj").show();
+                    } else {
+                        $("#divproj").hide();
+                    }
+
+                  });
+                });
+            </script>
+
+            <form t-attf-action="/shop/confirm_order" method="post" name="coupon_code">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" t-nocache="The csrf token must always be up to date."/>
+                <div class="form-group">
+                    <label>Request type</label>
+                    <select class="profile_param form-select" name="type_request" id="type_request">
+                        <option value=""></option>
+                        <option value="reserve">Reserve for sirin</option>
+                        <option value="project">Use in Project</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="divproj">
+                    <label>Project Selection </label>
+                    <select name="project_id" class="profile_param form-select">
+                        <option value="">Select a Project</option>
+                        <t t-foreach="request.env['project.project'].search([])" t-as="project">
+                            <option t-att-value="project.id">
+                                <t t-esc="project.name"/>
+                            </option>
+                        </t>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Request Date</label>
+                    <input type="date" name="date_request" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label>Delivery Requirements</label>
+                    <textarea
+                            class="form-control s_website_form_input"
+                            name="dis_request"
+                            t-ref="fakeTextarea"
+                    />
+                </div>
+
+<!--                <p class="alert alert-warning" t-if="request.params.get('error')" role="status">-->
+<!--                    <span t-esc="request.params.get('msg')"/>-->
+<!--                </p>-->
+<!--                <p class="alert alert-success" t-if="not request.params.get('error')" role="status">-->
+<!--                    <span t-esc="request.params.get('msg')"/>-->
+<!--                </p>-->
+
+                <br/>
+                <button class="s_website_form_send btn btn-primary order-lg-3 w-100 w-lg-auto ms-lg-auto" name="rfq_btn"
+                        type="submit" value="Submit">
+                    Send
+                    <i class="fa fa-angle-right ms-2 fw-light"/>
+                </button>
+
+            </form>
+
+        </xpath>
+    </template>
+</odoo>
